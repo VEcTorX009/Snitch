@@ -25,7 +25,7 @@ const OnboardingData = () => {
       </Carousel>
       <View style={styles.container}>
         <Text style={[style.text, style.textcenter, style.onboardheading]}>{"Our determination\n for safety"}</Text>
-        <Text>{"SafeSentry is dedicated to make sure\nevery student is safe in every campus,\nclassroom, and moment."}</Text>
+        <Text style={style.onboardingpara}>{"SafeSentry is dedicated to make sure\nevery student is safe in every campus,\nclassroom, and moment."}</Text>
         <TouchableOpacity onPress={handleLogin} style={style.getstartedbutton}>
           <Text style={[style.textwhite, styles.textcenter, style.buttontext]}>Get Started</Text>
         </TouchableOpacity>

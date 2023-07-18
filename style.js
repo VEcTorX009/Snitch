@@ -14,7 +14,7 @@ const style= StyleSheet.create({
   },
   
   onboardingpara:{
-    marginTop: 15,   
+    marginTop: 10,   
   },
   getstartedbutton:{
     marginTop: 20,

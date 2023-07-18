@@ -9,12 +9,13 @@ import {
 import style from "./style";
 import Icon from "react-native-vector-icons/FontAwesome";
 
-const LoginScreen = ({ navigation }) => {
+const LoginScreen = ({ navigation,setIsloggedin,userdetails,setUserdetails,setLogindetails, logindetails }) => {
   const [showsignup, setShowsignup] = useState(true)
   const handleLoginNow = () => {
     setUserdetails({})
     navigation.navigate("Home");
     setLogindetails({})
+    setIsloggedin(true)
   };
   const handleforgotpassword = () => {
    
@@ -23,14 +24,8 @@ const LoginScreen = ({ navigation }) => {
     setLogindetails({})
     navigation.navigate("Home");
     setUserdetails({})
+    setIsloggedin(true)
   };
-  const [userdetails, setUserdetails] = useState({
-    firstname: "",
-    lastname: "",
-    email: "",
-    password: "",
-  });
-  const [logindetails, setLogindetails] = useState({email: "", password:""})
 
   const [isPasswordVisible, setPasswordVisible] = useState(false);
 
@@ -49,13 +44,13 @@ const LoginScreen = ({ navigation }) => {
             <TextInput
               style={style.input}
               placeholder="Your First Name"
-              value={userdetails.firstname}
+              value={userdetails?.firstname}
               onChangeText={(e) => setUserdetails({ ...userdetails, firstname: e })} />
             <Text style={style.label}>Last Name</Text>
             <TextInput
               style={style.input}
               placeholder="Your Last Name"
-              value={userdetails.lastname}
+              value={userdetails?.lastname}
               onChangeText={(e) => setUserdetails({ ...userdetails, lastname: e })} />
             <Text style={style.label}>Email</Text>
             <View style={style.inputContainer}>
@@ -63,7 +58,7 @@ const LoginScreen = ({ navigation }) => {
               <TextInput
                 style={[style.input, style.noborder]}
                 placeholder="School Email"
-                value={userdetails.email}
+                value={userdetails?.email}
                 onChangeText={(e) => setUserdetails({ ...userdetails, email: e })} />
             </View>
             <Text style={style.label}>Password</Text>
@@ -73,7 +68,7 @@ const LoginScreen = ({ navigation }) => {
                 style={[style.input, style.noborder, style.inputwidth]}
                 placeholder="Password"
                 secureTextEntry={!isPasswordVisible}
-                value={userdetails.password}
+                value={userdetails?.password}
                 onChangeText={(e) => setUserdetails({ ...userdetails, password: e })} />
               <TouchableOpacity onPress={handleTogglePasswordVisibility}>
                 <Icon
@@ -91,7 +86,7 @@ const LoginScreen = ({ navigation }) => {
               <Text style={style.buttontext}>Sign Up</Text>
             </TouchableOpacity>
             <TouchableOpacity onPress={()=> setShowsignup(false)}>
-              <Text style={[style.comments, style.bottom]}>Have an account?<Text style={style.textpurple}>
+              <Text style={[style.comments, style.bottom]}>Have an account? <Text style={style.textpurple}>
 
                 Login Now
               </Text>
@@ -105,7 +100,7 @@ const LoginScreen = ({ navigation }) => {
             <TextInput
               style={style.input}
               placeholder="Your Email"
-              value={logindetails.firstname}
+              value={logindetails?.firstname}
               onChangeText={(e) => setLogindetails({ ...logindetails, email: e })} />
            
             <Text style={style.label}>Password</Text>
@@ -115,7 +110,7 @@ const LoginScreen = ({ navigation }) => {
                 style={[style.input, style.noborder, style.inputwidth]}
                 placeholder="Password"
                 secureTextEntry={!isPasswordVisible}
-                value={logindetails.password}
+                value={logindetails?.password}
                 onChangeText={(e) => setLogindetails({ ...logindetails, password: e })} />
               <TouchableOpacity onPress={handleTogglePasswordVisibility}>
                 <Icon
