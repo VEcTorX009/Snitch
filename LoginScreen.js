@@ -8,9 +8,13 @@ import {
 } from "react-native-gesture-handler";
 import style from "./style";
 import Icon from "react-native-vector-icons/FontAwesome";
+import { useNavigation } from '@react-navigation/native';
 
-const LoginScreen = ({ navigation,setIsloggedin,userdetails,setUserdetails,setLogindetails, logindetails }) => {
+const LoginScreen = ({ route }) => {
+  const {setIsloggedin,userdetails,setUserdetails,setLogindetails, logindetails} = route.params;
   const [showsignup, setShowsignup] = useState(true)
+  const navigation = useNavigation();
+
   const handleLoginNow = () => {
     setUserdetails({})
     navigation.navigate("Home");
@@ -120,7 +124,7 @@ const LoginScreen = ({ navigation,setIsloggedin,userdetails,setUserdetails,setLo
               </TouchableOpacity>
             </View>
           </View><View style={style.container}>
-            <TouchableOpacity style={[style.getstartedbutton, style.buttonwidth]} onPress={handleSignUp}>
+            <TouchableOpacity style={[style.getstartedbutton, style.buttonwidth]} onPress={handleLoginNow}>
               <Text style={style.buttontext}>Login</Text>
             </TouchableOpacity>
             <TouchableOpacity onPress={handleforgotpassword}>
