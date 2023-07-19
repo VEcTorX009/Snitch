@@ -8,38 +8,46 @@ import {
 } from "react-native-gesture-handler";
 import style from "./style";
 import Icon from "react-native-vector-icons/FontAwesome";
-import { CommonActions } from "@react-navigation/native";
+import UserContext from "./utils/UserContext";
 
+import { useToast } from "react-native-toast-notifications";
+
+import { useContext } from "react";
 const LoginScreen = ({ navigation }) => {
-  const [userdetails, setUserdetails] = useState({
-    firstname: "",
-    lastname: "",
-    email: "",
-    password: "",
-  });
-  const [logindetails, setLogindetails] = useState({ email: "", password: "" });
-
+  const toast = useToast();
+const {userdetails, setUserdetails, logindetails, setLogindetails,setIsloggedin}=useContext(UserContext)
 
   const [showsignup, setShowsignup] = useState(true);
 
   const handleLoginNow = () => {
-    setUserdetails({});
-    navigation.dispatch(
-      CommonActions.reset({
-        index: 0,
-        routes: [{ name: 'Home' }], //pass logindetails to home
-        params: { logindetails: logindetails },
-      }))
-  };
-  const handleforgotpassword = () => {};
-  const handleSignUp = () => {
-    setLogindetails({});
-    navigation.dispatch(
-      CommonActions.reset({
-        index: 0,
-        routes: [{ name: 'Home' }], //pass logindetails to home
-        params: { userdetails: userdetails },
-      }))
+    if(logindetails.email!="" || logindetails.password!=""){
+
+      setUserdetails({});
+      setIsloggedin(true)
+    }
+    else{
+      toast.show(
+        'Please Enter Details!',{
+          type: 'error', // You can use 'info', 'success', 'error', or 'warning'
+   });
+  }
+}
+
+const handleforgotpassword = () => {};
+const handleSignUp = () => {
+  if(userdetails.email!=="" || userdetails.firstname!=="" || userdetails.lastname!=="" || userdetails.password!==""){
+      setIsloggedin(true)
+      
+      setLogindetails({});
+     
+    }
+    
+  else{
+    toast.show(
+      'Please Enter Details!',{
+     type: 'error', // You can use 'info', 'success', 'error', or 'warning'
+   });
+  }
   };
 
   const [isPasswordVisible, setPasswordVisible] = useState(false);

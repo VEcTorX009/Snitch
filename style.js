@@ -121,6 +121,38 @@ const style= StyleSheet.create({
   },
   extremebottom:{
     marginTop: 240,
+  },
+  rowcontainer:{
+    display: "flex",
+    flexDirection: "row"
+  },
+  gapmed:{
+    gap: 4,
+  },
+  gaplesser:{
+    gap: -4,
+  },
+  fontnormal:{
+    marginTop: 3,
+    fontSize:14
+  },
+  bell:{
+    position: "absolute",
+    top: 20,
+    right: 20
+  },
+  searchwidth:{
+    width: 340,
+    borderRadius: 300,
+  },
+  searchbutton:{
+    width: 90,
+    height: 43,
+    marginTop: -1,
+    marginLeft: -53,
+  },
+  searchinputwidth:{
+    width: 240,
   }
 
 })
