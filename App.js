@@ -16,15 +16,7 @@ export default function App() {
     "Poppins-Regular": Poppins_400Regular,
   });
 
-  const [userdetails, setUserdetails] = useState({
-    firstname: "",
-    lastname: "",
-    email: "",
-    password: "",
-  });
-  const [logindetails, setLogindetails] = useState({ email: "", password: "" });
 
-  const [isloggedin, setIsloggedin] = useState(false);
   if (!fontsLoaded) {
     return null;
   }
@@ -33,8 +25,7 @@ export default function App() {
       <NavigationContainer>
         <StatusBar style="auto" />
         <Stack.Navigator>
-          {!isloggedin ? (
-            <>
+         
             
               <Stack.Screen
                 name="Onboarding"
@@ -42,23 +33,15 @@ export default function App() {
                 options={{ headerShown: false }}
               />
               <Stack.Screen
-                setLogindetails={setLogindetails}
-                logindetails={logindetails}
-                setIsloggedin={setIsloggedin}
-                setUserdetails={setUserdetails}
-                userdetails={userdetails}
-                name="Login"
                 component={LoginScreen}
+                name="Login"
                 options={{ headerShown: false }}
               />
-            </>
-          ) : (
             <Stack.Screen
               name="Home"
               component={Home}
               options={{ headerShown: false }}
             />
-          )}
         </Stack.Navigator>
       </NavigationContainer>
     </View>
