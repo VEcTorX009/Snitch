@@ -13,6 +13,9 @@ import UserContext from "./utils/UserContext";
 import { ToastProvider } from "react-native-toast-notifications";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { faCheck, faCross, faWarning } from "@fortawesome/free-solid-svg-icons";
+import Navbar from "./components/Navbar";
+import Map from "./Map";
+import Search from "./Search";
 
 const Stack = createStackNavigator();
 
@@ -29,15 +32,10 @@ export default function App() {
   });
   const [logindetails, setLogindetails] = useState({ email: "", password: "" });
   const [isloggedin, setIsloggedin] = useState(false);
+  const [search, setSearch] = useState("")
 
-  // Check if user is already logged in (you can use your own logic here)
   useEffect(() => {
-    // Check if the user is logged in (e.g., check for an authentication token)
-    // If the user is logged in, setIsloggedin(true)
-    // Otherwise, setIsloggedin(false)
-    // For demonstration purposes, I'm using a setTimeout to simulate an async check
-      setIsloggedin(true); // Set this to true if the user is logged in
-    
+    setIsloggedin(true); // Set this to true if the user is logged in
   }, []);
 
   if (!fontsLoaded) {
@@ -73,6 +71,8 @@ export default function App() {
               logindetails,
               setLogindetails,
               setIsloggedin,
+              setSearch,
+              search
             }}
           >
             <Stack.Navigator>
@@ -90,11 +90,23 @@ export default function App() {
                   />
                 </>
               ) : (
-                <Stack.Screen
-                  name="Home"
-                  component={Home}
-                  options={{ headerShown: false }}
-                />
+                <>
+                  <Stack.Screen
+                    name="Home"
+                    component={Home}
+                    options={{ headerShown: false }}
+                  />
+                  <Stack.Screen
+                    name="Map"
+                    component={Map}
+                    options={{ headerShown: false }}
+                  />
+                  <Stack.Screen
+                    name="Search"
+                    component={Search}
+                    options={{ headerShown: false }}
+                  />
+                </>
               )}
             </Stack.Navigator>
           </UserContext.Provider>

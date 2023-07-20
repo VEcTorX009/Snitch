@@ -5,6 +5,7 @@ const Carousel = ({ children, autoSlideInterval = 3000 }) => {
   const carouselRef = useRef(null);
   const [currentPage, setCurrentPage] = useState(0);
   const { width: screenWidth } = Dimensions.get('window');
+  let interval; // Define the interval variable
 
   const handleScroll = (event) => {
     const contentOffsetX = event.nativeEvent.contentOffset.x;
@@ -23,7 +24,7 @@ const Carousel = ({ children, autoSlideInterval = 3000 }) => {
   };
 
   useEffect(() => {
-    let interval = setInterval(() => {
+    interval = setInterval(() => {
       const nextPage = (currentPage + 1) % React.Children.count(children);
       scrollToPage(nextPage);
     }, autoSlideInterval);
@@ -73,11 +74,12 @@ const Carousel = ({ children, autoSlideInterval = 3000 }) => {
 };
 
 const styles = StyleSheet.create({
-    container: {
-      borderRadius: 100,
+  container: {
+    borderRadius: 100,
     flex: 1,
   },
   page: {
+    marginRight: -4.24,
     width: Dimensions.get('window').width,
     borderRadius: 100,
   },

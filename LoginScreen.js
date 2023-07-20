@@ -20,7 +20,7 @@ const {userdetails, setUserdetails, logindetails, setLogindetails,setIsloggedin}
   const [showsignup, setShowsignup] = useState(true);
 
   const handleLoginNow = () => {
-    if(logindetails.email!="" || logindetails.password!=""){
+    if(logindetails.email!="" && logindetails.password!=""){
 
       setUserdetails({});
       setIsloggedin(true)
@@ -35,7 +35,7 @@ const {userdetails, setUserdetails, logindetails, setLogindetails,setIsloggedin}
 
 const handleforgotpassword = () => {};
 const handleSignUp = () => {
-  if(userdetails.email!=="" || userdetails.firstname!=="" || userdetails.lastname!=="" || userdetails.password!==""){
+  if(userdetails.email!=="" && userdetails.firstname!=="" && userdetails.lastname!=="" && userdetails.password!==""){
       setIsloggedin(true)
       
       setLogindetails({});
