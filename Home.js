@@ -24,9 +24,11 @@ const Home = () => {
   
   const details = userdetails.firstname ? userdetails : logindetails;
   const handleSearch = () => {
-    setSearch(emp)
-    setEmp("")
-    navigator.navigate("Search");
+    if(emp){
+      setSearch(emp)
+      setEmp("")
+      navigator.navigate("Search");
+    }
   };
   const [filter, setFilter] = useState("");
   const [emp, setEmp] = useState("")

@@ -24,22 +24,22 @@ const Navbar = () => {
       </TouchableOpacity>
 
       <TouchableOpacity
-        onPress={() => navigation.navigate('Post')}
-        style={[style.navbariconContainer, route.name === 'Post' && style.navbariconContainerActive]}
+        onPress={() => navigation.navigate('Add')}
+        style={[style.navbariconContainer, route.name === 'Add' && style.navbariconContainerActive]}
       >
         <Image source={require("../assets/post.png")} style={[style.navbaricons, style.posticon]} />
       </TouchableOpacity>
 
       <TouchableOpacity
-        onPress={() => navigation.navigate('Warning')}
-        style={[style.navbariconContainer, route.name === 'Warning' && style.navbariconContainerActive]}
+        onPress={() => navigation.navigate('Emergency')}
+        style={[style.navbariconContainer, route.name === 'Emergency' && style.navbariconContainerActive]}
       >
         <Image source={require("../assets/warning.png")} style={style.navbaricons} />
       </TouchableOpacity>
 
       <TouchableOpacity
-        onPress={() => navigation.navigate('Profile')}
-        style={[style.navbariconContainer, route.name === 'Profile' && style.navbariconContainerActive]}
+        onPress={() => navigation.navigate('Settings')}
+        style={[style.navbariconContainer, route.name === 'Settings' && style.navbariconContainerActive]}
       >
         <Image source={require("../assets/profile.png")} style={style.navbaricons} />
       </TouchableOpacity>

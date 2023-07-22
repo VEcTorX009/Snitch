@@ -39,6 +39,7 @@ const handleSignUp = () => {
       setIsloggedin(true)
       
       setLogindetails({});
+      setUserdetails({email: userdetails.email, firstname: firstname.email, lastname: userdetails.lastname,password: userdetails.password});
      
     }
     

@@ -20,7 +20,7 @@ const Search = () => {
     <>
     <View style={style.container}>
 
-      <Text style={style.loginheading}>Searching for "{set}"</Text>
+      <Text style={style.loginheading}>Searching for "{set.trim()}"</Text>
       <Reports />
     </View>
 

@@ -6,7 +6,7 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 import style from "../style";
 
 const Reports = ({ filter }) => {
-  const { search, setSearch } = useContext(UserContext);
+  const { search, setSearch, setSelectedReport,reports } = useContext(UserContext);
   const [set, setSet] = useState("");
   useEffect(() => {
     setSet(search);
@@ -14,47 +14,18 @@ const Reports = ({ filter }) => {
       setSearch("");
     }, 9000);
   }, []);
-
-  const reports = [
-    {
-      category: "School",
-      title: "Reporting student prevents\ndrug ring and wins gold medal",
-      pfp: require("../assets/report1pfp.png"),
-      image: require("../assets/report1.png"),
-      authore: "Sierra Jaren",
-      time: "5 hours ago",
-    },
-    {
-      category: "School",
-      title: "Reporting student prevents\ndrug ring and wins gold medal",
-      pfp: require("../assets/report1pfp.png"),
-      image: require("../assets/report1.png"),
-      authore: "Sierra Jaren",
-      time: "5 hours ago",
-    },
-    {
-      category: "National",
-      title: "Student stops school shooting\nacross 4 states",
-      pfp: require("../assets/report2pfp.png"),
-      image: require("../assets/report2.png"),
-      authore: "Aarav Cona",
-      time: "8 hours ago",
-    },
-    {
-      category: "National",
-      title: "Student stops school shooting\nacross 4 states",
-      pfp: require("../assets/report2pfp.png"),
-      image: require("../assets/report2.png"),
-      authore: "Aarav Cona",
-      time: "8 hours ago",
-    },
-  ];
+  
+  // {selectedReport && <ReportDetails report={selectedReport} />}
+  const handleReportPress = (report) => {
+    setSelectedReport(report);
+  };
   return search === ""
     ? reports.map((val, index) => {
         return !filter ? (
           <TouchableOpacity
             key={index}
             style={[style.container, style.rowcontainer, style.report]}
+            onPress={() => handleReportPress(val)} // Pass the report when pressed
           >
             <View>
               <Image source={val.image} style={[style.reportimage]} />
@@ -77,6 +48,7 @@ const Reports = ({ filter }) => {
           <TouchableOpacity
             key={index}
             style={[style.container, style.rowcontainer, style.report]}
+            onPress={() => handleReportPress(val)} // Pass the report when pressed
           >
             <View>
               <Image source={val.image} style={[style.reportimage]} />
@@ -100,10 +72,12 @@ const Reports = ({ filter }) => {
         );
       })
     : reports.map((val, index) => {
-        return val.title.includes(set) ? (
+        return val.title.toLowerCase().includes(set.trim().toLowerCase()) ||
+          val.category.toLowerCase().includes(set.trim().toLowerCase()) ? (
           <TouchableOpacity
             key={index}
             style={[style.container, style.rowcontainer, style.report]}
+            onPress={() => handleReportPress(val)} // Pass the report when pressed
           >
             <View>
               <Image source={val.image} style={[style.reportimage]} />
@@ -123,7 +97,7 @@ const Reports = ({ filter }) => {
             </View>
           </TouchableOpacity>
         ) : (
-         ""
+          ""
         );
       });
 };

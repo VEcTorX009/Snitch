@@ -11,7 +11,6 @@ const style = StyleSheet.create({
     justifyContent: "center",
     fontWeight: "bold",
   },
-
   onboardingpara: {
     marginTop: 10,
   },
@@ -36,6 +35,15 @@ const style = StyleSheet.create({
     alignItems: "center",
     textAlign: "center",
   },
+  lesscontainer:{
+    justifyContent: "center",
+    alignItems: "center",
+    paddingTop: 10,
+    paddingLeft: 5,
+    paddingRight: 5,
+    textAlign: "left",
+
+  },
   scroll: {
     width: 340,
     marginBottom: 100,
@@ -51,9 +59,9 @@ const style = StyleSheet.create({
     textAlign: "center",
   },
   loginscreencontainer: {
-    marginTop: 30,
     paddingTop: 20,
     paddingLeft: 20,
+    textAlign: "left",
     paddingRight: 20,
     flex: 1,
   },
@@ -91,7 +99,7 @@ const style = StyleSheet.create({
     borderWidth: 1,
     borderColor: "black",
     borderRadius: 10,
-    height: 50,
+    // height: 50,
     borderRadius: 5,
     paddingHorizontal: 10,
   },
@@ -129,6 +137,7 @@ const style = StyleSheet.create({
   rowcontainer: {
     display: "flex",
     flexDirection: "row",
+    
   },
   gapmed: {
     gap: 4,
@@ -169,7 +178,7 @@ const style = StyleSheet.create({
 
   backgroundImage: {
     flex: 1,
-    zIndex: 999,
+    zIndex: -1,
     resizeMode: "cover",
   },
   left: {
@@ -196,6 +205,7 @@ const style = StyleSheet.create({
     paddingHorizontal: 25,
     marginHorizontal: 5,
     marginVertical: 5,
+    zIndex: 9999999,
   },
   cathead: {
     textAlign: "center",
@@ -203,13 +213,10 @@ const style = StyleSheet.create({
   },
   report: {
     marginTop: -15,
-    // backgroundColor: "black",
     height: 180,
     gap: 15,
     display: "flex",
     flexDirection: "row",
-    // marginLeft: 10,
-    // justifyContent: "space-between",
   },
   reportimage: {
     width: 100,
@@ -239,6 +246,10 @@ const style = StyleSheet.create({
   },
   noz:{
 zIndex: -999999,
+},
+yesz:{
+    zIndex: 999999,
+
   },
   navbarbody:{
     height: 85,
@@ -270,5 +281,92 @@ zIndex: -999999,
     borderBottomWidth: 2, // Add a border to the bottom of the active icon
     borderColor: 'blue', // Change this to the color you desire for the active icon underline
   },
+  mapbg:{
+    paddingVertical: 100,
+    paddingHorizontal: 30,
+    resizeMode :"cover",
+    alignItems :"center"
+  },
+  loginsearch:{
+    marginVertical: 10,
+  },
+  mapsearch:{
+    marginTop: -100,
+  },
+  mapbody:{
+    position: "absolute",
+    width: 300,
+    height: 400,
+    top: 10,
+  },
+  school:{
+    position: "absolute",
+    width: 30,
+    height: 34,
+  },
+  danger:{
+    position: "absolute",
+    width: 30,
+    height: 34,
+  },
+  run:{
+    width: 30,
+    height: 34,
+    position: "absolute"
+  },
+  
+  run1:{
+    top: 200,
+    right: 60,
+  },
+  run2:{
+    right: 50,
+    top: 300,
+  },
+  run3:{
+    left: 50,
+    top: -150,
+  },
+  school1:{
+    top: -170,
+    right: 100,
+  },
+  school2:{
+    left: 50,
+    left: 100,
+    top: 400,
+  },
+  school3:{
+    left:50,
+    top: 150,
+  },
+  danger1:{
+    top: 350,
+    right: 180,
+  },
+  danger2:{
+    top: 90,
+    right: 10,
+  },
+  danger3:{
+    top: 150,
+    right: 150,
+  },
+  noround:{
+    borderRadius: 0
+  },
+  textleft:{
+    textAlign: "left"
+  },
+  close: {
+    position: "absolute",
+    right: 0,
+    top: 10,
+  },addcontainer:{
+    margin : 30,
+    textAlign: "left",
+    alignItems: "flex-start",
+    justifyContent :"flex-start"
+  }
 });
 export default style;
