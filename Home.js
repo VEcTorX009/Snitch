@@ -16,6 +16,7 @@ import CategorySlider from "./components/CategorySlider";
 import Navbar from "./components/Navbar";
 import { useNavigation } from "@react-navigation/native";
 import Reports from "./components/Reports";
+import { useEffect } from "react";
 
 const Home = () => {
   const navigator = useNavigation();
@@ -30,6 +31,10 @@ const Home = () => {
       navigator.navigate("Search");
     }
   };
+  useEffect(() => {
+    setSearch("")
+  }, [])
+  
   const [filter, setFilter] = useState("");
   const [emp, setEmp] = useState("")
 

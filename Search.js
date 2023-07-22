@@ -1,4 +1,4 @@
-import { View, Text } from "react-native";
+import { View, Text, ScrollView } from "react-native";
 import React, { useEffect, useState } from "react";
 import Navbar from "./components/Navbar";
 import UserContext from "./utils/UserContext";
@@ -11,9 +11,7 @@ const Search = () => {
   const [set, setSet] = useState("");
   useEffect(() => {
     setSet(search);
-    setTimeout(() => {
-      setSearch("");
-    }, 9000);
+   
   }, []);
 
   return (
@@ -21,7 +19,10 @@ const Search = () => {
     <View style={style.container}>
 
       <Text style={style.loginheading}>Searching for "{set.trim()}"</Text>
+      <ScrollView vertical showsVerticalScrollIndicator={false} style={style.scroll}>
       <Reports />
+      </ScrollView>
+
     </View>
 
       <Navbar />

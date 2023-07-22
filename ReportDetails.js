@@ -29,7 +29,7 @@ const ReportDetails = () => {
       <Text style={[style.text, style.loginheading, style.semibold,{marginTop: 30}]}>
         {selectedReport?.title}
       </Text>
-      <Image source={selectedReport?.image} style={[style.banner,style.noround]} />
+      <Image source={{ uri: selectedReport?.image}} style={[style.banner,style.noround]} />
 <View>
 
       <Text style={[style.textcenter]}>{selectedReport?.when}</Text>
@@ -62,7 +62,7 @@ const ReportDetails = () => {
     </View>
 
       <View style={[style.container,style.rowcontainer, { marginTop: 10 }, {justifyContent :"center"}]}>
-        <Image source={selectedReport?.pfp} style={style.pfp} />
+        <Image source={{ uri: selectedReport?.pfp}} style={style.pfp} />
         <Text style={[style.text, style.semibold, { marginLeft: 10 }]}>
           {selectedReport?.authore}
         </Text>

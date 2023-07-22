@@ -10,9 +10,6 @@ const Reports = ({ filter }) => {
   const [set, setSet] = useState("");
   useEffect(() => {
     setSet(search);
-    setTimeout(() => {
-      setSearch("");
-    }, 9000);
   }, []);
   
   // {selectedReport && <ReportDetails report={selectedReport} />}
@@ -28,13 +25,13 @@ const Reports = ({ filter }) => {
             onPress={() => handleReportPress(val)} // Pass the report when pressed
           >
             <View>
-              <Image source={val.image} style={[style.reportimage]} />
+              <Image source={{ uri: val.image }} style={[style.reportimage]} />
             </View>
             <View style={[style.reportcontainer]}>
               <Text style={[style.reportlabel]}>{val.category}</Text>
               <Text style={[style.reportheading]}>{val.title}</Text>
               <View style={[style.rowcontainer, style.gapmed]}>
-                <Image source={val.pfp} style={style.pfp} />
+                <Image source={{ uri: val.pfp }} style={style.pfp} />
                 <Text style={[style.label, style.reportutils]}>
                   {val.authore}
                 </Text>
@@ -51,13 +48,13 @@ const Reports = ({ filter }) => {
             onPress={() => handleReportPress(val)} // Pass the report when pressed
           >
             <View>
-              <Image source={val.image} style={[style.reportimage]} />
+              <Image source={{ uri: val.image }} style={[style.reportimage]} />
             </View>
             <View style={[style.reportcontainer]}>
               <Text style={[style.reportlabel]}>{val.category}</Text>
               <Text style={[style.reportheading]}>{val.title}</Text>
               <View style={[style.rowcontainer, style.gapmed]}>
-                <Image source={val.pfp} style={style.pfp} />
+                <Image source={{ uri: val.pfp }} style={style.pfp} />
                 <Text style={[style.label, style.reportutils]}>
                   {val.authore}
                 </Text>
@@ -73,24 +70,24 @@ const Reports = ({ filter }) => {
       })
     : reports.map((val, index) => {
         return val.title.toLowerCase().includes(set.trim().toLowerCase()) ||
-          val.category.toLowerCase().includes(set.trim().toLowerCase()) ? (
+          val.category.toLowerCase().includes(set.trim().toLowerCase()) || val.description.toLowerCase().includes(set.trim().toLowerCase()) || val.authore.toLowerCase()===(set.trim.toLowerCase())   ? (
           <TouchableOpacity
             key={index}
             style={[style.container, style.rowcontainer, style.report]}
             onPress={() => handleReportPress(val)} // Pass the report when pressed
           >
-            <View>
-              <Image source={val.image} style={[style.reportimage]} />
+            <View style={[style.container,style.reportcontainer,style.leftimg]}>
+              <Image source={{ uri: val.image }} style={[style.reportimage]} />
             </View>
             <View style={[style.reportcontainer]}>
               <Text style={[style.reportlabel]}>{val.category}</Text>
               <Text style={[style.reportheading]}>{val.title}</Text>
               <View style={[style.rowcontainer, style.gapmed]}>
-                <Image source={val.pfp} style={style.pfp} />
-                <Text style={[style.label, style.reportutils]}>
+                <Image source={{ uri: val.pfp}} style={style.pfp} />
+                <Text style={[ style.reportutils]}>
                   {val.authore}
                 </Text>
-                <Text style={[style.label, style.reportutils]}>
+                <Text style={[ style.reportutils]}>
                   - {val.time}
                 </Text>
               </View>

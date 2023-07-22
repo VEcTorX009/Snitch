@@ -214,6 +214,7 @@ const style = StyleSheet.create({
   report: {
     marginTop: -15,
     height: 180,
+    width: "auto",
     gap: 15,
     display: "flex",
     flexDirection: "row",
@@ -235,14 +236,20 @@ const style = StyleSheet.create({
   },
   reportutils: {
     color: "gray",
+    fontSize: 13,
   },
   reportcontainer: {
+    justifyContent : "center",
+    width: 190, 
     gap: 10,
     display: "flex",
   },
   time: {
     color: "gray",
     fontSize: 12,
+  },
+  smalltext:{
+    fontSize: 8,
   },
   noz:{
 zIndex: -999999,
@@ -367,6 +374,9 @@ yesz:{
     textAlign: "left",
     alignItems: "flex-start",
     justifyContent :"flex-start"
+  },leftimg:{
+    backgroundColor: "black",
+    marginLeft: 80,
   }
 });
 export default style;

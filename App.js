@@ -18,6 +18,9 @@ import Map from "./Map";
 import Search from "./Search";
 import ReportDetails from "./ReportDetails";
 import Add from "./Add";
+import Emergency from "./Emergency";
+import reportsData from "./reports.json"; // Import the JSON data
+import * as FileSystem from 'expo-file-system';
 
 const Stack = createStackNavigator();
 
@@ -51,75 +54,41 @@ export default function App() {
       time: "",
     },
   );
+  
+const writeJSONFile = async (data) => {
+  try {
+    const fileUri = FileSystem.documentDirectory + 'reports.json';
+    const jsonString = JSON.stringify(data);
+    await FileSystem.writeAsStringAsync(fileUri, jsonString, {
+      encoding: FileSystem.EncodingType.UTF8,
+    });
+  } catch (error) {
+    console.error('Error writing JSON file:', error);
+  }
+};
   useEffect(() => {
     setIsloggedin(true); // Set this to true if the user is logged in
-    setReports([
-      {
-        category: "School",
-        title: "Reporting student prevents\ndrug ring and wins gold medal",
-        pfp: require("./assets/report1pfp.png"),
-        image: require("./assets/report1.png"),
-        authore: "Sierra Jaren",
-        time: "5 hours ago",
-        description:
-          "Paul Rogan notiched drug ring in his school at 9:00 am , 10 July and reported to SafeSentry. The Police arrived and caught the victims to prision and investigation. Paul Rogan got rewarded with a gold medal for his act.",
-        tags: ["shooter risk", "online harassment", "racism", "sexism"],
-        when: "10 July | 9:00 am",
-        timeline: "Four Guy masked in Black are chasing a vehicle",
-        involved: "Paul Rogan, Sierra Jaren",
-        social: "Instagram : sierrajaren_",
-        location: "Sienna College",
-      },
+    const fetchReports = async () => {
+      try {
+        const fileUri = FileSystem.documentDirectory + 'reports.json';
+        const fileExists = await FileSystem.getInfoAsync(fileUri);
+        if (fileExists.exists) {
+          const data = await FileSystem.readAsStringAsync(fileUri);
+          setReports(JSON.parse(data));
+        } else {
+          // If the file doesn't exist, create it and initialize it with default data
+          setReports(reportsData);
+          await writeJSONFile(reportsData);
+        }
+      } catch (error) {
+        console.error('Error reading JSON file:', error);
+        // If there's an error reading the file, use the default data
+        setReports(reportsData);
+      }
+    };
 
-      {
-        category: "School",
-        title: "Reporting student prevents\ndrug ring and wins gold medal",
-        pfp: require("./assets/report1pfp.png"),
-        image: require("./assets/report1.png"),
-        authore: "Sierra Jaren",
-        time: "5 hours ago",
-        description:
-          "Paul Rogan notiched drug ring in his school at 9:00 am , 10 July and reported to SafeSentry. The Police arrived and caught the victims to prision and investigation. Paul Rogan got rewarded with a gold medal for his act.",
-        tags: ["shooter risk", "online harassment", "racism", "sexism"],
-        when: "10 July | 9:00 am",
-        timeline: "Four Guy masked in Black are chasing a vehicle",
-        involved: "Paul Rogan, Sierra Jaren",
-        social: "Instagram : sierrajaren_",
-        location: "Sienna College",
-      },
-      {
-        category: "National",
-        title: "Student stops school shooting\nacross 4 states",
-        description:
-          "Paul Rogan notiched drug ring in his school at 9:00 am , 10 July and reported to SafeSentry. The Police arrived and caught the victims to prision and investigation. Paul Rogan got rewarded with a gold medal for his act.",
-        pfp: require("./assets/report2pfp.png"),
-        image: require("./assets/report2.png"),
-        authore: "Aarav Cona",
-        time: "8 hours ago",
-        tags: ["shooter risk", "online harassment", "racism", "sexism"],
-        when: "10 July | 9:00 am",
-        timeline: "Four Guy masked in Black are chasing a vehicle",
-        involved: "Paul Rogan, Sierra Jaren",
-        social: "Instagram : sierrajaren_",
-        location: "Sienna College",
-      },
-      {
-        description:
-          "Paul Rogan notiched drug ring in his school at 9:00 am , 10 July and reported to SafeSentry. The Police arrived and caught the victims to prision and investigation. Paul Rogan got rewarded with a gold medal for his act.",
-        category: "National",
-        title: "Student stops school shooting\nacross 4 states",
-        pfp: require("./assets/report2pfp.png"),
-        image: require("./assets/report2.png"),
-        authore: "Aarav Cona",
-        time: "8 hours ago",
-        tags: ["shooter risk", "online harassment", "racism", "sexism"],
-        when: "10 July | 9:00 am",
-        timeline: "Four Guy masked in Black are chasing a vehicle",
-        involved: "Paul Rogan, Sierra Jaren",
-        social: "Instagram : sierrajaren_",
-        location: "Sienna College",
-      },
-    ]);
+    fetchReports();
+
   }, []);
 
   if (!fontsLoaded) {
@@ -205,6 +174,11 @@ export default function App() {
                   <Stack.Screen
                     name="Add"
                     component={Add}
+                    options={{ headerShown: false }}
+                  />
+                  <Stack.Screen
+                    name="Emergency"
+                    component={Emergency}
                     options={{ headerShown: false }}
                   />
                 </>

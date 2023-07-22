@@ -6,15 +6,55 @@ import Navbar from "./components/Navbar";
 import UserContext from "./utils/UserContext";
 import { useContext } from "react";
 import Icon from "react-native-vector-icons/FontAwesome";
-import { useNavigation } from "@react-navigation/native";
 import { useState } from "react";
 import SelectDropdown from "react-native-select-dropdown";
 import { useToast } from "react-native-toast-notifications";
+import * as ImagePicker from "expo-image-picker";
+// import RNFS from 'react-native-fs';
+import * as FileSystem from 'expo-file-system';
+
+
 
 const Add = () => {
+  const writeJSONFile = async (data) => {
+    try {
+      const fileUri = FileSystem.documentDirectory + 'reports.json';
+      const jsonString = JSON.stringify(data);
+      await FileSystem.writeAsStringAsync(fileUri, jsonString, {
+        encoding: FileSystem.EncodingType.UTF8,
+      });
+    } catch (error) {
+      console.error('Error writing JSON file:', error);
+    }
+  };
+  
+  
+
+  const [image, setImage] = useState(null);
+  const pickImage = async () => {
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.All,
+      allowsEditing: true,
+      aspect: [4, 3],
+      quality: 1,
+    });
+
+    if (!result.canceled) {
+      // Save the selected image to the assets folder
+      const assetUri = result.assets[0].uri;
+      const filename = assetUri.split('/').pop();
+      const assetPath = FileSystem.cacheDirectory + filename;
+      await FileSystem.moveAsync({
+        from: assetUri,
+        to: assetPath,
+      });
+      setImage(assetPath);
+    }
+  };
   const options = ["Happening Now", "Has Happened", "Going to Happen"];
   const [selectedOption, setSelectedOption] = useState([]);
   const toast = useToast();
+
   const onSelect = (index, value) => {
     const currentDate = new Date();
     const selectedTime = new Date();
@@ -48,6 +88,7 @@ const Add = () => {
     useContext(UserContext);
   const handlesubmit = async () => {
     console.log(createreport);
+    console.log(image)
     if (
       createreport.location &&
       createreport.type &&
@@ -62,8 +103,8 @@ const Add = () => {
         {
           category: "School",
           title: createreport.title,
-          pfp: require("./assets/report1pfp.png"),
-          image: require("./assets/report1.png"),
+          pfp: "https://i.ibb.co/ZMftYjc/report1pfp.png",
+          image: image,
           authore: userdetails.firstname + " " + userdetails.lastname,
           time: createreport.when,
           description: createreport.description,
@@ -75,22 +116,20 @@ const Add = () => {
           location: createreport.location,
         },
       ]);
-
+      await writeJSONFile(reports);
       setCreatereport({});
+      toast.show("Thankyou For Sharing!", {
+        type: "success", // You can use 'info', 'success', 'error', or 'warning'
+      });
     } else {
       toast.show("Please Enter Details!", {
         type: "error", // You can use 'info', 'success', 'error', or 'warning'
       });
     }
-
-    // const navigation = useNavigation();
-    // navigation.navigate("Home");
   };
 
   const handlecancel = () => {
     setCreatereport({});
-    const navigation = useNavigation();
-    navigation.navigate("Home");
   };
 
   return (
@@ -210,6 +249,12 @@ Ex. Instagram: jane_doe123`}
                     setCreatereport({ ...createreport, socials: e })
                   }
                 />
+              </View>
+              <Text style={style.label}>Upload Media</Text>
+              <View style={style.inputContainer}>
+                <TouchableOpacity onPress={pickImage}>
+                  <Text>Upload Image</Text>
+                </TouchableOpacity>
               </View>
               <TouchableOpacity
                 onPress={handlesubmit}
