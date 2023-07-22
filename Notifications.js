@@ -1,4 +1,4 @@
-import { View, Text, Image } from "react-native";
+import { View, Text, Image, ScrollView } from "react-native";
 import React, { useEffect, useState } from "react";
 import UserContext from "./utils/UserContext";
 import { useContext } from "react";
@@ -15,6 +15,8 @@ const Notifications = () => {
     navigation.navigate("Home")
 };
   return(<>
+  <ScrollView  horizontal showsHorizontalScrollIndicator={true} style={style.scroll} >
+
 <View style={style.container}>
 <TouchableOpacity style={[style.close,style.left,style.yesz]} onPress={close}>
       <Icon
@@ -53,7 +55,10 @@ const Notifications = () => {
           </View>
         )})
  }
-</View><Navbar/>
+</View>
+  </ScrollView>
+
+<Navbar/>
  </>
 
   )

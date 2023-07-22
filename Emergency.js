@@ -33,7 +33,7 @@ const Emergency = () => {
   const toast = useToast();
 
 
-  const { userdetails, aids,setAids,createaid,setCreateaid } =
+  const { userdetails, aids,setAids,createaid,setCreateaid,createreport } =
     useContext(UserContext);
   const handlesubmit = async () => {
     if (createaid.location!=""||createaid.services!=""||createaid.description!=""||createaid.injuries!="") {
