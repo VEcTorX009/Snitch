@@ -11,6 +11,7 @@ const style = StyleSheet.create({
     justifyContent: "center",
     fontWeight: "bold",
   },
+  profilebih:{height: 800, width: 365},
   onboardingpara: {
     marginTop: 10,
   },

@@ -1,0 +1,26 @@
+[
+  {
+    "authore": "Sierra Jaren",
+    "description": "I need ambulance right now!",
+    "tags": ["ambulance", "paramedicas", "coastguard", "police"],
+    "when": "10 July | 9:00 am",
+    "injuries": "yes no yes no",
+    "location": "Cupertino High School B-Building Main Hall"
+  },
+  {
+    "author": "Jake Ballard",
+    "description": "I need firefighters right now!",
+    "tags": ["ambulance", "paramedicas", "coastguard", "police"],
+    "when": "10 July | 9:00 am",
+    "injuries": "yes no yes no",
+    "location": "Collins Elementary School Rm 211"
+  },
+  {
+    "authore": "Olivia Pope",
+    "description": "I need the police right now!",
+    "tags": ["ambulance", "paramedicas", "coastguard", "police"],
+    "when": "10 July | 9:00 am",
+    "injuries": "yes no yes no",
+    "location": "Lawson Middle School Zone C"
+  }
+]

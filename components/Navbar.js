@@ -11,7 +11,7 @@ const Navbar = () => {
     <View style={style.navbarbody}>
       <TouchableOpacity
         onPress={() => navigation.navigate('Home')}
-        style={[style.navbariconContainer, route.name === 'Home' && style.navbariconContainerActive]}
+        style={[style.navbariconContainer, route.name === 'Home'&& style.navbariconContainerActive]}
       >
         <Image source={require("../assets/home.png")} style={style.navbaricons} />
       </TouchableOpacity>
@@ -38,8 +38,8 @@ const Navbar = () => {
       </TouchableOpacity>
 
       <TouchableOpacity
-        onPress={() => navigation.navigate('Settings')}
-        style={[style.navbariconContainer, route.name === 'Settings' && style.navbariconContainerActive]}
+        onPress={() => navigation.navigate('Profile')}
+        style={[style.navbariconContainer, route.name === 'Profile' && style.navbariconContainerActive]}
       >
         <Image source={require("../assets/profile.png")} style={style.navbaricons} />
       </TouchableOpacity>

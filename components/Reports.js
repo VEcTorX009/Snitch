@@ -10,6 +10,7 @@ const Reports = ({ filter }) => {
   const [set, setSet] = useState("");
   useEffect(() => {
     setSet(search);
+    console.log(reports)
   }, []);
   
   const handleReportPress = (report) => {
@@ -69,7 +70,7 @@ const Reports = ({ filter }) => {
       })
     : reports.map((val, index) => {
         return val.title.toLowerCase().includes(set.trim().toLowerCase()) ||
-          val.category.toLowerCase().includes(set.trim().toLowerCase()) || val.description.toLowerCase().includes(set.trim().toLowerCase()) || val.authore.toLowerCase()===(set.trim.toLowerCase())   ? (
+          val.category.toLowerCase().includes(set.trim().toLowerCase()) || val.description.toLowerCase().includes(set.trim().toLowerCase())   ? (
           <TouchableOpacity
             key={index}
             style={[style.container, style.rowcontainer, style.report]}

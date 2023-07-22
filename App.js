@@ -20,7 +20,10 @@ import ReportDetails from "./ReportDetails";
 import Add from "./Add";
 import Emergency from "./Emergency";
 import reportsData from "./reports.json"; // Import the JSON data
-import * as FileSystem from 'expo-file-system';
+import aidsdata from "./aids.json"; // Import the JSON data
+import * as FileSystem from "expo-file-system";
+import Notifications from "./Notifications";
+import Profile from "./Profile";
 
 const Stack = createStackNavigator();
 
@@ -40,59 +43,91 @@ export default function App() {
   const [logindetails, setLogindetails] = useState({ email: "", password: "" });
   const [isloggedin, setIsloggedin] = useState(false);
   const [search, setSearch] = useState("");
-  const [createreport, setCreatereport] = useState(
-    {
-      location: "",
-      type: "",
-      title:"",
-      description: "",
-      when: "",
-      timeline: "",
-      involved: "",
-      evidence: null,
-      socials: "",
-      time: "",
-    },
-  );
-  
-const writeJSONFile = async (data) => {
-  try {
-    const fileUri = FileSystem.documentDirectory + 'reports.json';
-    const jsonString = JSON.stringify(data);
-    await FileSystem.writeAsStringAsync(fileUri, jsonString, {
-      encoding: FileSystem.EncodingType.UTF8,
-    });
-  } catch (error) {
-    console.error('Error writing JSON file:', error);
-  }
-};
+  const [createreport, setCreatereport] = useState({
+    location: "",
+    type: "",
+    title: "",
+    description: "",
+    when: "",
+    timeline: "",
+    involved: "",
+    evidence: null,
+    socials: "",
+    time: "",
+  });
+  const [createaid, setCreateaid] = useState({
+    location: "",
+    services: "",
+    description: "",
+    injuries: "",
+    when: ""
+  });
+  const [aids, setAids] = useState([{}]);
+  const writeJSONFile = async (data) => {
+    try {
+      const fileUri = FileSystem.documentDirectory + "reports.json";
+      const jsonString = JSON.stringify(data);
+      await FileSystem.writeAsStringAsync(fileUri, jsonString, {
+        encoding: FileSystem.EncodingType.UTF8,
+      });
+    } catch (error) {
+      console.error("Error writing JSON file:", error);
+    }
+  };
+  const writeJSONFile1 = async (data) => {
+    try {
+      const fileUri = FileSystem.documentDirectory + "aids.json";
+      const jsonString = JSON.stringify(data);
+      await FileSystem.writeAsStringAsync(fileUri, jsonString, {
+        encoding: FileSystem.EncodingType.UTF8,
+      });
+    } catch (error) {
+      console.error("Error writing JSON file:", error);
+    }
+  };
   useEffect(() => {
-    setIsloggedin(true); // Set this to true if the user is logged in
+    setIsloggedin(false); // Set this to true if the user is logged in
     const fetchReports = async () => {
       try {
-        const fileUri = FileSystem.documentDirectory + 'reports.json';
+        const fileUri = FileSystem.documentDirectory + "reports.json";
         const fileExists = await FileSystem.getInfoAsync(fileUri);
-        console.log(fileExists)
         if (fileExists.exists) {
           const data = await FileSystem.readAsStringAsync(fileUri);
-          console.log("file found")
           setReports(JSON.parse(data));
         } else {
           // If the file doesn't exist, create it and initialize it with default data
-          console.log("filedoesnot exist")
           setReports(reportsData);
           await writeJSONFile(reportsData);
         }
       } catch (error) {
-          console.log("filedoesnot exist")
-        console.error('Error reading JSON file:', error);
+        console.error("Error reading JSON file:", error);
         // If there's an error reading the file, use the default data
         setReports(reportsData);
       }
     };
 
+    const fetchAids = async () => {
+      try {
+        const fileUri = FileSystem.documentDirectory + "aids.json";
+        const fileExists = await FileSystem.getInfoAsync(fileUri);
+        if (fileExists.exists) {
+          const data = await FileSystem.readAsStringAsync(fileUri);
+          setAids(JSON.parse(data));
+          
+        } else {
+          // If the file doesn't exist, create it and initialize it with default data
+          setAids(aidsdata);
+          await writeJSONFile1(aidsdata);
+        }
+      } catch (error) {
+        console.error("Error reading JSON file:", error);
+        // If there's an error reading the file, use the default data
+        setAids(aidsdata);
+      }
+    };
+    
     fetchReports();
-
+    fetchAids();
   }, []);
 
   if (!fontsLoaded) {
@@ -135,7 +170,11 @@ const writeJSONFile = async (data) => {
               selectedReport,
               setSelectedReport,
               reports,
-              setReports
+              setReports,
+              setAids,
+              aids,
+              createaid,
+              setCreateaid
             }}
           >
             <Stack.Navigator>
@@ -176,6 +215,11 @@ const writeJSONFile = async (data) => {
                     options={{ headerShown: false }}
                   />
                   <Stack.Screen
+                    name="Notifications"
+                    component={Notifications}
+                    options={{ headerShown: false }}
+                  />
+                  <Stack.Screen
                     name="Add"
                     component={Add}
                     options={{ headerShown: false }}
@@ -183,6 +227,11 @@ const writeJSONFile = async (data) => {
                   <Stack.Screen
                     name="Emergency"
                     component={Emergency}
+                    options={{ headerShown: false }}
+                  />
+                  <Stack.Screen
+                    name="Profile"
+                    component={Profile}
                     options={{ headerShown: false }}
                   />
                 </>

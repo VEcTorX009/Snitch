@@ -20,10 +20,13 @@ import { useEffect } from "react";
 
 const Home = () => {
   const navigator = useNavigation();
-  const { userdetails, logindetails, setSearch, search } =
+  const { userdetails, logindetails, setSearch } =
     useContext(UserContext);
   
   const details = userdetails.firstname ? userdetails : logindetails;
+  const notifications= ()=>{
+    navigator.navigate("Notifications")
+  }
   const handleSearch = () => {
     if(emp){
       setSearch(emp)
@@ -50,10 +53,13 @@ const Home = () => {
           />
           <Text style={[style.text, style.fontnormal]}>Bloxburg, RBX</Text>
         </View>
+
         <Icon
+        onPress={()=> notifications()}
           name="bell"
           size={30}
           color="#724ED9"
+          
           style={[style.icon, style.bell]}
         />
         <View style={style.container}>
@@ -83,6 +89,11 @@ const Home = () => {
               </Text>
             </TouchableOpacity>
           </View>
+          <ScrollView
+            style={style.scroll}
+            vertical
+            showsVerticalScrollIndicator={false}
+          >
           <View style={style.banner}>
             <Carousel>
               <ImageBackground
@@ -105,11 +116,7 @@ const Home = () => {
             </Text>
             <CategorySlider setFilter={setFilter} />
           </View>
-          <ScrollView
-            style={style.scroll}
-            vertical
-            showsVerticalScrollIndicator={false}
-          >
+         
             <View style={[style.container]}>
              <Reports filter={filter}/>
             </View>
