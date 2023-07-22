@@ -72,15 +72,19 @@ const writeJSONFile = async (data) => {
       try {
         const fileUri = FileSystem.documentDirectory + 'reports.json';
         const fileExists = await FileSystem.getInfoAsync(fileUri);
+        console.log(fileExists)
         if (fileExists.exists) {
           const data = await FileSystem.readAsStringAsync(fileUri);
+          console.log("file found")
           setReports(JSON.parse(data));
         } else {
           // If the file doesn't exist, create it and initialize it with default data
+          console.log("filedoesnot exist")
           setReports(reportsData);
           await writeJSONFile(reportsData);
         }
       } catch (error) {
+          console.log("filedoesnot exist")
         console.error('Error reading JSON file:', error);
         // If there's an error reading the file, use the default data
         setReports(reportsData);

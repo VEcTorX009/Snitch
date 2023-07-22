@@ -1,4 +1,4 @@
-import { View, Text, TouchableOpacity, Image } from "react-native";
+import { View, Text, TouchableOpacity, Image, ImageBackground } from "react-native";
 import React from "react";
 import style from "./style";
 import { ScrollView, TextInput } from "react-native-gesture-handler";
@@ -23,6 +23,7 @@ const Add = () => {
       await FileSystem.writeAsStringAsync(fileUri, jsonString, {
         encoding: FileSystem.EncodingType.UTF8,
       });
+      console.log("done writing")
     } catch (error) {
       console.error('Error writing JSON file:', error);
     }
@@ -103,12 +104,12 @@ const Add = () => {
         {
           category: "School",
           title: createreport.title,
-          pfp: "https://i.ibb.co/ZMftYjc/report1pfp.png",
-          image: image,
+          pfp: "https://i.ibb.co/jV7vX62/profile.png",
+          image: image? image: "https://i.ibb.co/ZMftYjc/report1.png",
           authore: userdetails.firstname + " " + userdetails.lastname,
           time: createreport.when,
           description: createreport.description,
-          tags: [createreport.type.split(",").map((keyword) => keyword.trim())],
+          tags: createreport.type.split(",").map((keyword) => keyword.trim()),
           when: createreport.time,
           timeline: createreport.timeline,
           involved: createreport.involved,
@@ -251,24 +252,18 @@ Ex. Instagram: jane_doe123`}
                 />
               </View>
               <Text style={style.label}>Upload Media</Text>
-              <View style={style.inputContainer}>
-                <TouchableOpacity onPress={pickImage}>
-                  <Text>Upload Image</Text>
+              <View style={[style.inputContainer,style.noborder]}>
+              <ImageBackground source={require("./assets/download.png")} style={[style.backgroundImage]}>
+                <TouchableOpacity style={style.download} onPress={pickImage}>
+
                 </TouchableOpacity>
+              </ImageBackground>
               </View>
-              <TouchableOpacity
-                onPress={handlesubmit}
-                style={style.getstartedbutton}
-              >
-                <Text
-                  style={[style.textwhite, style.textcenter, style.buttontext]}
-                >
-                  Submit
-                </Text>
-              </TouchableOpacity>
+              <View style={[style.rowcontainer,style.gapmed,style.center]}>
+
               <TouchableOpacity
                 onPress={handlecancel}
-                style={style.getstartedbutton}
+                style={[style.getstartedbutton,{width: 120}, {height: 40},{backgroundColor : "gray"}]}
               >
                 <Text
                   style={[style.textwhite, style.textcenter, style.buttontext]}
@@ -276,7 +271,18 @@ Ex. Instagram: jane_doe123`}
                   Cancel
                 </Text>
               </TouchableOpacity>
+              
+              <TouchableOpacity
+                onPress={handlesubmit}
+                style={[style.getstartedbutton,{width: 120}, {height: 40}]}              >
+                <Text
+                  style={[style.textwhite, style.textcenter, style.buttontext]}
+                >
+                  Submit
+                </Text>
+              </TouchableOpacity>
             </View>
+              </View>
           </View>
         </View>
       </ScrollView>

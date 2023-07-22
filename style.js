@@ -166,6 +166,14 @@ const style = StyleSheet.create({
     marginTop: -1,
     marginLeft: -50,
   },
+  download:{
+    width: 200,
+    height:90
+  },
+  center:{
+justifyContent: "center",
+alignItems: "center"
+  },
   searchinputwidth: {
     width: 240,
   },
@@ -180,6 +188,7 @@ const style = StyleSheet.create({
     flex: 1,
     zIndex: -1,
     resizeMode: "cover",
+
   },
   left: {
     textAlign: "left",

@@ -12,7 +12,6 @@ const Reports = ({ filter }) => {
     setSet(search);
   }, []);
   
-  // {selectedReport && <ReportDetails report={selectedReport} />}
   const handleReportPress = (report) => {
     setSelectedReport(report);
   };
